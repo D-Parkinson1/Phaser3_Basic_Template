@@ -1,0 +1,35 @@
+{
+  "name": "phaser3_basic_template",
+  "version": "1.0.0",
+  "description": "A phaser 3 template",
+  "main": "dist/main.js",
+  "scripts": {
+    "dev": "webpack-dev-server --mode development --open",
+    "build": "webpack --mode production"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Fabadiculous/Phaser3_Basic_Template.git"
+  },
+  "author": "Daniel Parkinson",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.4",
+    "babel-preset-env": "^1.7.0",
+    "copy-webpack-plugin": "^4.5.1",
+    "html-loader": "^0.5.5",
+    "html-webpack-plugin": "^3.2.0",
+    "webpack": "^4.12.0"
+  },
+  "dependencies": {
+    "phaser": "^3.10.1",
+    "phaser3-nineslice": "^0.3.1",
+    "webpack-cli": "^3.0.8",
+    "webpack-dev-server": "^3.1.4"
+  },
+  "bugs": {
+    "url": "https://github.com/Fabadiculous/Phaser3_Basic_Template/issues"
+  },
+  "homepage": "https://github.com/Fabadiculous/Phaser3_Basic_Template#readme"
+}
