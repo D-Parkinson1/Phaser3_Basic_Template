@@ -1,4 +1,4 @@
-# Phaser3_Basic_Template
+# Phaser3 Basic Template
 A simple template for a phaser 3 game.
 Including:
 - webpack dev server
