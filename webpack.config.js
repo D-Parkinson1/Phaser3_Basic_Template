@@ -2,32 +2,40 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-/* eslint-disable no-undef */
 
 module.exports = {
-    entry: { main: './src/index.js' },
+    entry: {
+        main: './src/index.js'
+    },
     output: {
         path: path.resolve(__dirname, 'dist'),
-        filename: 'main.js'
+        filename: '[name].bundle.js',
     },
-    externals: { phaser: 'phaser' },
     module: {
-        rules: [
-            {
+        rules: [{
                 test: /\.js$/,
+                include: path.resolve(__dirname, 'src'),
                 exclude: /node_modules/,
-                use: { loader: 'babel-loader' }
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: ['env']
+                    }
+                }
             },
             {
                 test: /\.html$/,
-                use: [
-                    {
-                        loader: 'html-loader',
-                        options: { minimize: true }
+                use: [{
+                    loader: 'html-loader',
+                    options: {
+                        minimize: true
                     }
-                ]
+                }]
             }
         ]
+    },
+    devServer: {
+        contentBase: path.join(__dirname, 'dist'),
     },
     plugins: [
         new webpack.DefinePlugin({
@@ -35,11 +43,30 @@ module.exports = {
             'typeof WEBGL_RENDERER': JSON.stringify(true)
         }),
         new HtmlWebpackPlugin({
-            template: './src/index.html',
+            template: './index.html',
             filename: './index.html'
         }),
         new CopyWebpackPlugin(
-            [ { from: 'src/assets', to: 'assets' } ]
+            [{
+                    from: path.resolve(__dirname, 'assets', '**', '*'),
+                    to: path.resolve(__dirname, 'dist')
+                },
+                {
+                    from: path.resolve(__dirname, 'index.html'),
+                    to: path.resolve(__dirname, 'dist')
+                }
+            ]
         )
-    ]
+    ],
+    optimization: {
+        splitChunks: {
+            chunks: 'all',
+            cacheGroups: {
+                vendors: {
+                    name: 'vendors',
+                    test: /[\\/]node_modules[\\/]/
+                }
+            }
+        }
+    }
 };
